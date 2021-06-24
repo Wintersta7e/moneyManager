@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="800" ResizeMode="NoResize">
     <Grid>
-        <DataGrid Name="MainGrid"
+        <DockPanel>
+            
+            <DataGrid Name="MainGrid"
                   Height="200"                  
                   HorizontalAlignment="Left"
                   IsReadOnly="True"
@@ -16,26 +18,40 @@
                   CanUserResizeColumns="False"
                   VerticalAlignment="Top"
                   ItemsSource="{Binding Assets}">
-        </DataGrid>
+            </DataGrid>
 
-        <StackPanel Grid.Column="1"
-                    Orientation="Vertical"
+            <Border Padding="5"
+                    Background="GhostWhite"
+                    BorderBrush="DimGray"
+                    BorderThickness="1, 2, 1, 2"
                     VerticalAlignment="Top"
-                    Margin="10"
-                    Width="150">
-            <TextBlock x:Name="StackPanelHeader" FontWeight="Bold">Add new Transaction</TextBlock>
+                    HorizontalAlignment="Left"
+                    Margin="20, 0, 0, 0">
 
-            <StackPanel Orientation="Vertical">
-                <TextBlock>Description</TextBlock>
-                <TextBox x:Name="txtDescription"/>
-            </StackPanel>
+                <StackPanel Grid.Column="1"
+                            Width="150">
+                    <TextBlock x:Name="StackPanelHeader"
+                               FontWeight="Bold">
+                               Add new Transaction
+                    </TextBlock>
 
-            <StackPanel Orientation="Vertical">
-                <TextBlock>Amount</TextBlock>
-                <TextBox x:Name="txtAmount" PreviewTextInput="NumericOnly"/>
-            </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock>Description</TextBlock>
+                        <TextBox x:Name="txtDescription"/>
+                    </StackPanel>
 
-            <Button x:Name="AddTransaction" Content="Add Transaction" Click="AddTransaction_Click" Margin="10"/>
-        </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock>Amount</TextBlock>
+                        <TextBox x:Name="txtAmount" PreviewTextInput="NumericOnly"/>
+                    </StackPanel>
+                    
+                    <Button x:Name="AddTransaction" Content="Add Transaction" Click="AddTransaction_Click" Margin="10"/>
+                    
+                </StackPanel>
+            </Border>
+            
+        </DockPanel>
+        
+
     </Grid>
 </Window>
