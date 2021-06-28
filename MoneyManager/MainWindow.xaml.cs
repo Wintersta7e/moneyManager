@@ -23,15 +23,9 @@ namespace MoneyManager
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Asset> Assets { get; set; }
-
         public MainWindow()
         {
             InitializeComponent();
-
-            this.Assets = new ObservableCollection<Asset>();
-
-            this.DataContext = this;
         }
 
         private void Window_Closing()
@@ -41,15 +35,15 @@ namespace MoneyManager
 
         private void AddTransaction_Click(object sender, RoutedEventArgs e)
         {
-            string description = txtDescription.Text;
-            double amount = convertToDouble(txtAmount.Text);
-            EAssetType type;
+            //string description = txtDescription.Text;
+            //double amount = convertToDouble(txtAmount.Text);
+            //EAssetType type;
 
-            type = amount < 0 ? EAssetType.EXPENSE : EAssetType.INCOME;
+            //type = amount < 0 ? EAssetType.EXPENSE : EAssetType.INCOME;
 
-            Asset ass = new Asset { Description = description, Amount = amount, Category = type, Date = DateTime.Now };
+            //Asset ass = new Asset { Description = description, Amount = amount, Category = type, Date = DateTime.Now };
 
-            this.Assets.Add(ass);
+            //this.Assets.Add(ass);
         }
 
         private void NumericOnly(object sender, TextCompositionEventArgs e)

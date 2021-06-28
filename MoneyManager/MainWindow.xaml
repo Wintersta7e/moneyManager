@@ -4,54 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MoneyManager"
+        xmlns:controls="clr-namespace:MoneyManager.Controls"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="800" ResizeMode="NoResize">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
         <DockPanel>
+            <controls:TransactionDataGrid Grid.Column="0" Grid.Row="0"/>
             
-            <DataGrid Name="MainGrid"
-                  Height="200"                  
-                  HorizontalAlignment="Left"
-                  IsReadOnly="True"
-                  AreRowDetailsFrozen="True"
-                  CanUserReorderColumns="False"
-                  CanUserResizeColumns="False"
-                  VerticalAlignment="Top"
-                  ItemsSource="{Binding Assets}">
-            </DataGrid>
 
-            <Border Padding="5"
-                    Background="GhostWhite"
-                    BorderBrush="DimGray"
-                    BorderThickness="1, 2, 1, 2"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Left"
-                    Margin="20, 0, 0, 0">
-
-                <StackPanel Grid.Column="1"
-                            Width="150">
-                    <TextBlock x:Name="StackPanelHeader"
-                               FontWeight="Bold">
-                               Add new Transaction
-                    </TextBlock>
-
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock>Description</TextBlock>
-                        <TextBox x:Name="txtDescription"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock>Amount</TextBlock>
-                        <TextBox x:Name="txtAmount" PreviewTextInput="NumericOnly"/>
-                    </StackPanel>
-                    
-                    <Button x:Name="AddTransaction" Content="Add Transaction" Click="AddTransaction_Click" Margin="10"/>
-                    
-                </StackPanel>
-            </Border>
             
+            <!--Separator Grid.Row="1"/-->
+
         </DockPanel>
-        
+
+
 
     </Grid>
 </Window>
