@@ -86,7 +86,7 @@ namespace MoneyManager.Models
 
         private double computeTotal()
         {
-            return this.computeIncome() - this.computeCosts();
+            return this.computeIncome() + this.computeCosts();
         }
         public double FinalSum
         {

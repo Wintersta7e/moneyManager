@@ -55,13 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\EnableMultiConverter.cs" />
+    <Compile Include="Converters\ScreenSize.cs" />
     <Compile Include="Models\Asset.cs" />
     <Compile Include="Models\EAssetType.cs" />
     <Compile Include="Controls\TransactionCreator.xaml.cs">
       <DependentUpon>TransactionCreator.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TransactionDataGrid.xaml.cs">
-      <DependentUpon>TransactionDataGrid.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -79,15 +78,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\TransactionDataGrid.xaml">
+    <Page Include="Styles\AssetListStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\MainWindowStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Interfaces\IAsset.cs" />
-    <Compile Include="Models\Interfaces\ICategory.cs" />
-    <Compile Include="Models\Interfaces\ITransaction.cs" />
+    <Compile Include="Models\ExpenseList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -22,7 +22,7 @@ namespace MoneyManager.Controls
     /// </summary>
     public partial class TransactionCreator : UserControl
     {
-        static Regex doubleReg = new Regex("^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$");
+        static Regex doubleReg = new Regex("^[.][0-9-]+$|^[0-9-]*[.]{0,1}[0-9-]*$");
 
         //public event handler to handle click on add button inside usercontrol
         public RoutedEventHandler OnAddTransaction;
@@ -89,6 +89,14 @@ namespace MoneyManager.Controls
             }
         }
 
+        public DateTime Date
+        {
+            get
+            {
+                return DateTime.Now;
+            }
+        }
+
         private EAssetType evaluateType(string amount)
         {
             return Convert.ToDouble(amount) < 0 ? EAssetType.EXPENSE : EAssetType.INCOME;
@@ -102,11 +110,11 @@ namespace MoneyManager.Controls
             return val;
         }
 
-        public Asset assetItem
+        public Asset AssetItem
         {
             get
             {
-                return new Asset { Description = this.Description, Amount = this.Amount, Category = this.Type, Date = DateTime.Now };
+                return new Asset { Description = this.Description, Amount = this.Amount, Category = this.Type, Date = this.Date };
             }
         }
     }

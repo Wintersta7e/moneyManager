@@ -15,32 +15,27 @@
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
                     Margin="20, 0, 0, 0">
-
         <StackPanel>
-            <TextBlock x:Name="StackPanelHeader"
-                               FontWeight="Bold">
-                               Add new Transaction
-            </TextBlock>
-
+            <Label x:Name="StackPanelHeader"
+                   FontWeight="Bold"
+                   Content="Add new Transaction">
+            </Label>
             <StackPanel Orientation="Vertical">
-                <TextBlock>Description</TextBlock>
+                <Label Content="Description"></Label>
                 <TextBox x:Name="txtDescription"/>
             </StackPanel>
-
             <StackPanel Orientation="Vertical">
-                <TextBlock>Amount</TextBlock>
+                <Label Content="Amount"></Label>
                 <TextBox x:Name="txtAmount"/>
             </StackPanel>
-
             <Button x:Name="AddTransaction" Content="Add Transaction" Margin="10">
                 <Button.IsEnabled>
-                    <MultiBinding>
+                    <MultiBinding Converter="{StaticResource EnableMultiConverter}">
                         <Binding ElementName="txtDescription" Path="Text"></Binding>
                         <Binding ElementName="txtAmount" Path="Text"></Binding>
                     </MultiBinding>
                 </Button.IsEnabled>
             </Button>
-
         </StackPanel>
     </Border>
 

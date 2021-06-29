@@ -23,38 +23,73 @@ namespace MoneyManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ExpenseList expenseList;
+
+        private int sel = -1;
+
+        public ExpenseList ExpenseList
+        {
+            get
+            {
+                return this.expenseList;
+            }
+            set
+            {
+                this.expenseList = value;
+            }
+        }
+
+        private void OnLoad()
+        {
+            this.expenseList = new ExpenseList();
+
+            this.AssetCreator.OnAddTransaction = new RoutedEventHandler(AddAsset);
+
+            this.IncomeList.ItemsSource = this.expenseList.Income;
+            this.CostsList.ItemsSource = this.expenseList.Costs;
+
+            this.DataContext = this;
+        }
+
+        private void UpdateResults()
+        {
+            this.TotalCosts.Text = this.expenseList.TotalCosts.ToString();
+            this.TotalIncome.Text = this.expenseList.TotalIncome.ToString();
+            this.TotalSum.Text = this.expenseList.FinalSum.ToString();
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            this.OnLoad();
         }
 
-        private void Window_Closing()
+        private void AddAsset(object sender, RoutedEventArgs e)
         {
-
+            this.expenseList.AddAsset(this.AssetCreator.AssetItem);
+            this.UpdateResults();
+            //this.AssetCreator.Reset();
         }
 
-        private void AddTransaction_Click(object sender, RoutedEventArgs e)
+        private void IncomeListSelection(object sender, RoutedEventArgs e)
         {
-            //string description = txtDescription.Text;
-            //double amount = convertToDouble(txtAmount.Text);
-            //EAssetType type;
+            if (this.IncomeList.Items.Count == 0)
+                return;
 
-            //type = amount < 0 ? EAssetType.EXPENSE : EAssetType.INCOME;
-
-            //Asset ass = new Asset { Description = description, Amount = amount, Category = type, Date = DateTime.Now };
-
-            //this.Assets.Add(ass);
+            this.sel = this.IncomeList.SelectedIndex;
+            if (this.sel > this.expenseList.Income.Count || this.sel < 0)
+                return;
         }
 
-        private void NumericOnly(object sender, TextCompositionEventArgs e)
+        private void CostsListSelection(object sender, RoutedEventArgs e)
         {
-            Regex regex = new Regex("[^0-9-]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
+            if (this.CostsList.Items.Count == 0)
+                return;
 
-        private double convertToDouble (string someDouble)
-        {
-            return Convert.ToDouble(someDouble);
+            this.sel = this.CostsList.SelectedIndex;
+            if (this.sel > this.expenseList.Costs.Count || this.sel < 0)
+                return;
         }
     }
 }

@@ -4,29 +4,117 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MoneyManager"
-        xmlns:controls="clr-namespace:MoneyManager.Controls"
+        xmlns:cAssetCreator="clr-namespace:MoneyManager.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="800" ResizeMode="NoResize">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition />
-        </Grid.RowDefinitions>
+        Style="{StaticResource MainWindowStyle}" Height="700" Width="800" ResizeMode="CanResize">
 
-        <DockPanel>
-            <controls:TransactionDataGrid Grid.Column="0" Grid.Row="0"/>
-            
+    <DockPanel LastChildFill="True">
+        <DockPanel LastChildFill="True" Margin="3" Background="WhiteSmoke">
+            <!--TOP CONTROL-->
+            <cAssetCreator:TransactionCreator x:Name="AssetCreator" DockPanel.Dock="Top" Margin="0, 10, 0, 0"/>
+            <!--END TOP CONTROL-->
 
-            
-            <!--Separator Grid.Row="1"/-->
+            <!--SHOW INCOME/COSTS LISTS-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Rectangle Grid.Column="1" Style="{StaticResource VDelimiter}"/>
+
+                <!-- =================== INCOME =================== -->
+                <Grid Grid.Column="0" Margin="20, 0, 0, 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="6.3*"/>
+                        <RowDefinition Height="3.5*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Border BorderBrush="DarkSlateGray" BorderThickness="2" Margin="10, 0">
+                            <ListView x:Name="IncomeList" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionMode="Single" SelectionChanged="IncomeListSelection">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="7*"/>
+                                                <ColumnDefinition Width="3*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Grid.Column="0" Text="{Binding Description}" Style="{StaticResource ListTitle}"/>
+                                            <TextBlock Grid.Column="2" Text="{Binding Amount}" Style="{StaticResource ListValue}"/>
+                                            <TextBlock Grid.Column="3" Text="{Binding Date}" Style="{StaticResource ListValue}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Border>
+                    </Grid>
+                </Grid>
+
+                <!-- =================== COSTS =================== -->
+                <Grid Grid.Column="2" Margin="0, 0, 20, 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="6.3*"/>
+                        <RowDefinition Height="3.5*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Border BorderBrush="DarkSlateGray" BorderThickness="2" Margin="10, 0">
+                            <ListView x:Name="CostsList" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionMode="Single" SelectionChanged="CostsListSelection">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="7*"/>
+                                                <ColumnDefinition Width="3*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Grid.Column="0" Text="{Binding Description}" Style="{StaticResource ListTitle}"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding Amount}" Style="{StaticResource ListValue}"/>
+                                            <TextBlock Grid.Column="2" Text="{Binding Date}" Style="{StaticResource ListValue}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <!--END SHOW INCOME/COSTS LISTS-->
+
+            <!--BOTTOM INFOS-->
+            <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource BottomSection}">
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Total Income"/>
+                    <Border BorderBrush="ForestGreen" BorderThickness="2">
+                        <TextBlock x:Name="TotalIncome" Text="0"/>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Total Costs"/>
+                    <Border BorderBrush="DarkRed" BorderThickness="2">
+                        <TextBlock x:Name="TotalCosts" Text="0"/>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="200, 0">
+                    <Label Content="Total Sum"/>
+                    <Border BorderBrush="CornflowerBlue" BorderThickness="2">
+                        <TextBlock x:Name="TotalSum" Text="0"/>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+            <!--END BOTTOM INFOS-->
+
+            <Rectangle DockPanel.Dock="Bottom" Style="{StaticResource HDelimiter}" Margin="40, 10"/>
+            <Rectangle DockPanel.Dock="Top" Style="{StaticResource HDelimiter}" Margin="40, 10"/>
 
         </DockPanel>
+    </DockPanel>
 
-
-
-    </Grid>
 </Window>
