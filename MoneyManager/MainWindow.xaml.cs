@@ -112,29 +112,15 @@ namespace MoneyManager
             switch (menu)
             {
                 case "menuSave":
-                    this.save();
+                    FileSaver.SaveFile(this.expenseList);
                     break;
                 case "menuLoad":
-                    this.load();
+                    Load();
                     break;
             }
         }
 
-        public void save()
-        {
-            var saveFileDialog = new SaveFileDialog
-            {
-                Filter = "Json files (*.json)|*.json|Text files (*.txt)|*.txt"
-            };
-
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                string fileName = saveFileDialog.FileName;
-                FileSaver.SaveAs(fileName, this.expenseList);
-            }
-        }
-
-        public void load()
+        public void Load()
         {
             var openFileDialog = new OpenFileDialog
             {

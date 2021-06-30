@@ -1,4 +1,5 @@
-﻿using MoneyManager.Models;
+﻿using Microsoft.Win32;
+using MoneyManager.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace MoneyManager.Helpers
 {
     public static class FileSaver
     {
+        private static string FILTER = "Json files (*.json)|*.json|Text files (*.txt)|*.txt";
+
         public static ExpenseList Load(string name)
         {
             string js = System.IO.File.ReadAllText(name);
@@ -36,10 +39,22 @@ namespace MoneyManager.Helpers
         public static void SaveAs (string name, ExpenseList expenseList)
         {
             ListObserver listObserver = new ListObserver(expenseList);
-
             string js = JsonConvert.SerializeObject(listObserver);
-
             System.IO.File.WriteAllText(name, js);
+        }
+
+        public static void SaveFile(ExpenseList expenseList)
+        {
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = FILTER
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string fileName = saveFileDialog.FileName;
+                SaveAs(fileName, expenseList);
+            }
         }
     }
 }
