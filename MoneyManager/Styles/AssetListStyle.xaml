@@ -2,28 +2,21 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:MoneyManager.Styles">
 
-    <Style TargetType="TextBlock" x:Key="ListTitle">
-        <Setter Property="FontFamily" Value="Consolas"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="FontSize" Value="18"/>
-        <Setter Property="Margin" Value="30, 0, 0, 0"/>
+
+    <Style TargetType="DataGrid" x:Key="TransactionsData">
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="ColumnWidth" Value="*"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="DimGray"/>
+        <Setter Property="VerticalGridLinesBrush" Value="DimGray"/>
+        <Setter Property="HeadersVisibility" Value="Column"/>
+        <Setter Property="CanUserResizeColumns" Value="False"/>
+        <Setter Property="CanUserResizeRows" Value="False"/>
+        <Setter Property="BorderBrush" Value="DimGray"/>
+        <Setter Property="RowBackground" Value="GhostWhite"/>
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="ListValue" BasedOn="{StaticResource ListTitle}">
-        <Setter Property="HorizontalAlignment" Value="Right"/>
-        <Setter Property="FontWeight" Value="Medium"/>
-        <Setter Property="Margin" Value="0, 0, 30, 0"/>
-    </Style>
-
-    <Style TargetType="TextBlock" x:Key="ListDate" BasedOn="{StaticResource ListTitle}">
-        <Setter Property="HorizontalAlignment" Value="Right"/>
-        <Setter Property="FontWeight" Value="Medium"/>
-        <Setter Property="Margin" Value="0, 0, 60, 0"/>
-    </Style>
-
-    <Style TargetType="ListViewItem">
-        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="Padding" Value="0, 5, 0, 5"/>
+    <Style TargetType="DataGridRowHeader" x:Key="DataGridRowHeader">
+        <Setter Property="TextBlock.FontWeight" Value="Bold"/>
     </Style>
 
 </ResourceDictionary>

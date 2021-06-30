@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MoneyManager"
         xmlns:cAssetCreator="clr-namespace:MoneyManager.Controls"
         mc:Ignorable="d"
-        Style="{StaticResource MainWindowStyle}" Height="700" Width="800" ResizeMode="CanResize">
+        Style="{StaticResource MainWindowStyle}">
 
     <DockPanel LastChildFill="True">
         <!--MENUs-->
@@ -17,7 +17,7 @@
             </MenuItem>
         </Menu>
         <!--END MENUs-->
-        
+
         <DockPanel LastChildFill="True" Margin="3" Background="WhiteSmoke">
             <!--BOTTOM INFOS-->
             <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource BottomSection}">
@@ -67,32 +67,23 @@
                 <!-- =================== INCOME =================== -->
                 <Grid Grid.Column="0" Margin="20, 0, 0, 0">
                     <Grid Grid.Row="0">
-                        <Border BorderBrush="DimGray" BorderThickness="2" Margin="10, 0">
-                            <DataGrid x:Name="IncomeList" 
-                                      ColumnWidth="*"
-                                      HeadersVisibility="Column"
+                        <DataGrid     x:Name="IncomeList"
+                                      Style="{StaticResource TransactionsData}"
+                                      RowHeaderStyle="{StaticResource DataGridRowHeader}"
                                       ItemsSource="{Binding Asset}"
-                                      SelectionChanged="IncomeListSelection"
-                                      CanUserResizeColumns="False" 
-                                      CanUserResizeRows="False">
-                            </DataGrid>
-                        </Border>
+                                      SelectionChanged="IncomeListSelection">
+                        </DataGrid>
                     </Grid>
                 </Grid>
 
                 <!-- =================== COSTS =================== -->
                 <Grid Grid.Column="2" Margin="0, 0, 20, 0">
                     <Grid Grid.Row="0">
-                        <Border BorderBrush="DimGray" BorderThickness="2" Margin="10, 0">
                             <DataGrid x:Name="CostsList"
-                                      ColumnWidth="*"
-                                      HeadersVisibility="Column"
+                                      Style="{StaticResource TransactionsData}"
                                       ItemsSource="{Binding Asset}" 
-                                      SelectionChanged="CostsListSelection" 
-                                      CanUserResizeColumns="False" 
-                                      CanUserResizeRows="False">
+                                      SelectionChanged="CostsListSelection">
                             </DataGrid>
-                        </Border>
                     </Grid>
                 </Grid>
             </Grid>

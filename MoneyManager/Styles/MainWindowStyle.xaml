@@ -9,7 +9,8 @@
     <Style TargetType="Window" x:Key="MainWindowStyle">
         <Setter Property="Title" Value="Money Manager"/>
         <Setter Property="ResizeMode" Value="CanMinimize"/>
-        <Setter Property="Background" Value="Black"/>
+        <Setter Property="ResizeMode" Value="CanResize"/>
+        <Setter Property="Background" Value="#36342f"/>
         <Setter Property="WindowState" Value="Maximized"/>
     </Style>
     
