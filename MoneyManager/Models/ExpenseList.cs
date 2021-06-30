@@ -22,28 +22,16 @@ namespace MoneyManager.Models
 
         public ObservableCollection<Asset> Costs
         {
-            get
-            {
-                return this.costs;
-            }
-            set
-            {
-                this.costs = value;
-            }
+            get => this.costs;
+            set => this.costs = value;
         }
 
         private ObservableCollection<Asset> income;
 
         public ObservableCollection<Asset> Income
         {
-            get
-            {
-                return this.income;
-            }
-            set
-            {
-                this.income = value;
-            }
+            get => this.income;
+            set => this.income = value;
         }
 
         private double computeCosts()
@@ -59,10 +47,7 @@ namespace MoneyManager.Models
 
         public double TotalCosts
         {
-            get
-            {
-                return this.computeCosts();
-            }
+            get => this.computeCosts();
         }
 
         private double computeIncome()
@@ -78,10 +63,7 @@ namespace MoneyManager.Models
 
         public double TotalIncome
         {
-            get
-            {
-                return this.computeIncome();
-            }
+            get => this.computeIncome();
         }
 
         private double computeTotal()
@@ -90,10 +72,7 @@ namespace MoneyManager.Models
         }
         public double FinalSum
         {
-            get
-            {
-                return this.computeTotal();
-            }
+            get => this.computeTotal();
         }
 
         public ExpenseList()

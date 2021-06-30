@@ -59,42 +59,24 @@ namespace MoneyManager.Controls
 
         public string Description
         {
-            get
-            {
-                return this.txtDescription.Text;
-            }
-            set
-            {
-                this.txtDescription.Text = value.ToString();
-            }
+            get => this.txtDescription.Text;
+            set => this.txtDescription.Text = value.ToString();
         }
 
         public double Amount
         {
-            get
-            {
-                return this.getVal();
-            }
-            set
-            {
-                this.txtAmount.Text = value.ToString();
-            }
+            get => this.getVal();
+            set => this.txtAmount.Text = value.ToString();
         }
 
         public EAssetType Type
         {
-            get
-            {
-                return this.evaluateType(this.txtAmount.Text);
-            }
+            get => this.evaluateType(this.txtAmount.Text);
         }
 
-        public DateTime Date
+        public string Date
         {
-            get
-            {
-                return DateTime.Now;
-            }
+            get => DateTime.Now.ToLongDateString();
         }
 
         private EAssetType evaluateType(string amount)
@@ -114,7 +96,7 @@ namespace MoneyManager.Controls
         {
             get
             {
-                return new Asset { Description = this.Description, Amount = this.Amount, Category = this.Type, Date = this.Date };
+                return new Asset { Description = this.Description, Amount = this.Amount, Category = this.Type, CreationDate = this.Date };
             }
         }
     }

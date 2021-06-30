@@ -5,28 +5,12 @@
                     xmlns:converters="clr-namespace:MoneyManager.Converters">
 
     <converters:EnableMultiConverter x:Key="EnableMultiConverter"/>
-    <converters:ScreenSize x:Key="ScreenSize"/>
-
-    <sys:Double x:Key="WPercent">0.6</sys:Double>
-    <sys:Double x:Key="HPercent">0.9</sys:Double>
-    <sys:Double x:Key="TopOffPercent">0.02</sys:Double>
-    <sys:Double x:Key="LeftOffPercent">0.015</sys:Double>
-
 
     <Style TargetType="Window" x:Key="MainWindowStyle">
         <Setter Property="Title" Value="Money Manager"/>
         <Setter Property="ResizeMode" Value="CanMinimize"/>
         <Setter Property="Background" Value="Black"/>
-
-        <Setter Property="Top" Value="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, 
-            Converter={StaticResource ScreenSize}, ConverterParameter='{StaticResource TopOffPercent}'}"/>
-        <Setter Property="Left" Value="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, 
-            Converter={StaticResource ScreenSize}, ConverterParameter='{StaticResource LeftOffPercent}'}"/>
-        <!-- WINDOW SIZE -->
-        <Setter Property="Width" Value="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}, 
-            Converter={StaticResource ScreenSize}, ConverterParameter='{StaticResource WPercent}'}"/>
-        <Setter Property="Height" Value="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, 
-            Converter={StaticResource ScreenSize}, ConverterParameter='{StaticResource HPercent}'}"/>
+        <Setter Property="WindowState" Value="Maximized"/>
     </Style>
     
     <!-- rectangle used as horizontal delimiter or separator -->

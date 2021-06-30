@@ -12,7 +12,7 @@ namespace MoneyManager.Models
 
         public double Amount { get; set; }
 
-        public DateTime Date { get; set; }
+        public string CreationDate { get; set; }
 
         public EAssetType Category { get; set; }
     }
