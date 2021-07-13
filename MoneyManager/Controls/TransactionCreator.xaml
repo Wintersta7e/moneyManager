@@ -1,21 +1,15 @@
 ﻿<UserControl x:Class="MoneyManager.Controls.TransactionCreator"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MoneyManager.Controls"
-             mc:Ignorable="d" 
-             Width="480">
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Width="400">
 
     <StackPanel Orientation="Vertical" Margin="0, 10, 0, 0">
-        
+
         <DockPanel Margin="0, 5, 0, 0">
-            <Border x:Name="TransactionBorder"
-                    Padding="5"
-                    Background="GhostWhite"
-                    BorderBrush="DimGray"
-                    BorderThickness="1, 2, 1, 2"
-                    Margin="20, 0, 0, 0">
+            <Border Style="{StaticResource BorderStyling}">
                 <StackPanel Orientation="Vertical">
                     <Label x:Name="StackPanelHeader"
                    FontWeight="Bold"
@@ -23,11 +17,11 @@
                     </Label>
                     <StackPanel>
                         <Label Content="Description"></Label>
-                        <TextBox x:Name="txtDescription"/>
+                        <TextBox x:Name="txtDescription" />
                     </StackPanel>
                     <StackPanel>
                         <Label Content="Amount"></Label>
-                        <TextBox x:Name="txtAmount"/>
+                        <TextBox x:Name="txtAmount" />
                     </StackPanel>
                     <StackPanel>
                         <Button x:Name="AddTransaction" Content="Add Transaction" Margin="10">
@@ -42,6 +36,5 @@
                 </StackPanel>
             </Border>
         </DockPanel>
-        
     </StackPanel>
 </UserControl>

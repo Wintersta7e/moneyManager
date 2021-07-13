@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="MoneyManager.Controls.PlanOverview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Width="250">
+
+    <StackPanel Orientation="Vertical" Margin="0, 10, 0, 0">
+        <DockPanel Margin="0, 5, 0, 0">
+            <Border Style="{StaticResource BorderStyling}">
+                <StackPanel>
+                    <Label Content="Current Plan and Fixed Cost" FontWeight="Bold"/>
+
+                    <StackPanel>
+                        <Label Content="Current Fixed Costs:" />
+                        <TextBox x:Name="txtFixedCost" />
+                    </StackPanel>
+
+                    <StackPanel>
+                        <Label Content="Financial goal for this month:" />
+                        <TextBox x:Name="txtFinancialPlan" />
+                    </StackPanel>
+
+                    <StackPanel>
+                        <Button x:Name="RefreshFinancePlan" Content="Refresh" Margin="10" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </DockPanel>
+    </StackPanel>
+</UserControl>

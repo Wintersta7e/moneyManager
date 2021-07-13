@@ -1,12 +1,7 @@
 ﻿using Microsoft.Win32;
 using MoneyManager.Models;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MoneyManager.Helpers
 {
@@ -36,7 +31,7 @@ namespace MoneyManager.Helpers
             return new ExpenseList(costs, income);
         }
 
-        public static void SaveAs (string name, ExpenseList expenseList)
+        public static void SaveAs(string name, ExpenseList expenseList)
         {
             ListObserver listObserver = new ListObserver(expenseList);
             string js = JsonConvert.SerializeObject(listObserver);

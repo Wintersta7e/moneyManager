@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MoneyManager.Models
 {
@@ -12,7 +7,7 @@ namespace MoneyManager.Models
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyRaised (string propertyName)
+        private void OnPropertyRaised(string propertyName)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
@@ -37,7 +32,7 @@ namespace MoneyManager.Models
         private double computeCosts()
         {
             double sum = 0;
-            foreach(Asset cost in costs)
+            foreach (Asset cost in costs)
             {
                 sum += cost.Amount;
             }
@@ -70,6 +65,7 @@ namespace MoneyManager.Models
         {
             return this.computeIncome() + this.computeCosts();
         }
+
         public double FinalSum
         {
             get => this.computeTotal();
@@ -87,7 +83,7 @@ namespace MoneyManager.Models
             this.income = _inc;
         }
 
-        public void AddAsset (Asset ass)
+        public void AddAsset(Asset ass)
         {
             if (ass.Category == EAssetType.EXPENSE)
                 this.costs.Add(ass);

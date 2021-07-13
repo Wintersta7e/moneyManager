@@ -1,19 +1,10 @@
-﻿using MoneyManager.Models;
+﻿using MoneyManager.Helpers;
+using MoneyManager.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MoneyManager.Controls
 {
@@ -22,8 +13,6 @@ namespace MoneyManager.Controls
     /// </summary>
     public partial class TransactionCreator : UserControl
     {
-        static Regex doubleReg = new Regex("^[.][0-9-]+$|^[0-9-]*[.]{0,1}[0-9-]*$");
-
         //public event handler to handle click on add button inside usercontrol
         public RoutedEventHandler OnAddTransaction;
 
@@ -35,16 +24,10 @@ namespace MoneyManager.Controls
         //test value input and "restrict" it to only doubles
         private void onTextPreviewInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = this.isDouble(e.Text);
+            e.Handled = ValueCheck.isDouble(e.Text);
         }
 
-        //use regex and test if value input text can be converted to double
-        bool isDouble(string number)
-        {
-            return !doubleReg.IsMatch(number);
-        }
-
-        void events()
+        private void events()
         {
             this.AddTransaction.Click += this.onAddTransactionClick;
             this.txtAmount.PreviewTextInput += this.onTextPreviewInput;
@@ -65,7 +48,7 @@ namespace MoneyManager.Controls
 
         public double Amount
         {
-            get => this.getVal();
+            get => ValueCheck.getVal(this.txtAmount.Text);
             set => this.txtAmount.Text = value.ToString();
         }
 
@@ -82,14 +65,6 @@ namespace MoneyManager.Controls
         private EAssetType evaluateType(string amount)
         {
             return Convert.ToDouble(amount) < 0 ? EAssetType.EXPENSE : EAssetType.INCOME;
-        }
-
-        private double getVal()
-        {
-            double val;
-            if (!Double.TryParse(this.txtAmount.Text, out val))
-                return 0;
-            return val;
         }
 
         public Asset AssetItem

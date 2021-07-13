@@ -1,22 +1,19 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:MoneyManager.Styles">
-
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="DataGrid" x:Key="TransactionsData">
-        <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="ColumnWidth" Value="*"/>
-        <Setter Property="HorizontalGridLinesBrush" Value="DimGray"/>
-        <Setter Property="VerticalGridLinesBrush" Value="DimGray"/>
-        <Setter Property="HeadersVisibility" Value="Column"/>
-        <Setter Property="CanUserResizeColumns" Value="False"/>
-        <Setter Property="CanUserResizeRows" Value="False"/>
-        <Setter Property="BorderBrush" Value="DimGray"/>
-        <Setter Property="RowBackground" Value="GhostWhite"/>
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="ColumnWidth" Value="*" />
+        <Setter Property="HorizontalGridLinesBrush" Value="DimGray" />
+        <Setter Property="VerticalGridLinesBrush" Value="DimGray" />
+        <Setter Property="HeadersVisibility" Value="Column" />
+        <Setter Property="CanUserResizeColumns" Value="False" />
+        <Setter Property="CanUserResizeRows" Value="False" />
+        <Setter Property="BorderBrush" Value="DimGray" />
+        <Setter Property="RowBackground" Value="GhostWhite" />
     </Style>
 
     <Style TargetType="DataGridRowHeader" x:Key="DataGridRowHeader">
-        <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+        <Setter Property="TextBlock.FontWeight" Value="Bold" />
     </Style>
-
 </ResourceDictionary>
