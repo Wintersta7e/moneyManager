@@ -12,7 +12,7 @@ namespace MoneyManager.Helpers
         public static ExpenseList Load(string name)
         {
             string js = System.IO.File.ReadAllText(name);
-            double transaction;
+            decimal transaction;
             ListObserver listObserver = JsonConvert.DeserializeObject<ListObserver>(js);
             ObservableCollection<Asset> income = new ObservableCollection<Asset>();
             ObservableCollection<Asset> costs = new ObservableCollection<Asset>();

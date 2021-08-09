@@ -27,13 +27,13 @@ namespace MoneyManager.Controls
             events();
         }
 
-        public double FinancePlan
+        public decimal FinancePlan
         {
             get => ValueCheck.getVal(this.txtFinancialPlan.Text);
             set => this.txtFinancialPlan.Text = value.ToString();
         }
 
-        public double FixedCosts
+        public decimal FixedCosts
         {
             get => ValueCheck.getVal(this.txtFixedCost.Text);
             set => this.txtFixedCost.Text = value.ToString();

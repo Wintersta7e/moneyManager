@@ -1,6 +1,7 @@
 ﻿using MoneyManager.Helpers;
 using MoneyManager.Models;
 using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -46,33 +47,26 @@ namespace MoneyManager.Controls
             set => this.txtDescription.Text = value.ToString();
         }
 
-        public double Amount
+        public decimal Amount
         {
             get => ValueCheck.getVal(this.txtAmount.Text);
             set => this.txtAmount.Text = value.ToString();
         }
 
-        public EAssetType Type
-        {
-            get => this.evaluateType(this.txtAmount.Text);
-        }
+        public EAssetType Type => EvaluateType(this.txtAmount.Text);
 
         public string Date
         {
             get => DateTime.Now.ToLongDateString();
         }
 
-        private EAssetType evaluateType(string amount)
+        private EAssetType EvaluateType(string amount)
         {
-            return Convert.ToDouble(amount) < 0 ? EAssetType.EXPENSE : EAssetType.INCOME;
+            if (amount.Contains("-"))
+                return EAssetType.EXPENSE;
+            return EAssetType.INCOME;
         }
 
-        public Asset AssetItem
-        {
-            get
-            {
-                return new Asset { Description = this.Description, Amount = this.Amount, Category = this.Type, CreationDate = this.Date };
-            }
-        }
+        public Asset AssetItem => new Asset { Description = this.Description, Amount = this.Amount, Category = this.Type, CreationDate = this.Date };
     }
 }

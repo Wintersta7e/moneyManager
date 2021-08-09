@@ -29,9 +29,9 @@ namespace MoneyManager.Models
             set => this.income = value;
         }
 
-        private double computeCosts()
+        private decimal computeCosts()
         {
-            double sum = 0;
+            decimal sum = 0;
             foreach (Asset cost in costs)
             {
                 sum += cost.Amount;
@@ -40,14 +40,14 @@ namespace MoneyManager.Models
             return sum;
         }
 
-        public double TotalCosts
+        public decimal TotalCosts
         {
             get => this.computeCosts();
         }
 
-        private double computeIncome()
+        private decimal computeIncome()
         {
-            double sum = 0;
+            decimal sum = 0;
             foreach (Asset inc in income)
             {
                 sum += inc.Amount;
@@ -56,17 +56,17 @@ namespace MoneyManager.Models
             return sum;
         }
 
-        public double TotalIncome
+        public decimal TotalIncome
         {
             get => this.computeIncome();
         }
 
-        private double computeTotal()
+        private decimal computeTotal()
         {
             return this.computeIncome() + this.computeCosts();
         }
 
-        public double FinalSum
+        public decimal FinalSum
         {
             get => this.computeTotal();
         }

@@ -12,8 +12,4 @@
         <Setter Property="BorderBrush" Value="DimGray" />
         <Setter Property="RowBackground" Value="GhostWhite" />
     </Style>
-
-    <Style TargetType="DataGridRowHeader" x:Key="DataGridRowHeader">
-        <Setter Property="TextBlock.FontWeight" Value="Bold" />
-    </Style>
 </ResourceDictionary>
