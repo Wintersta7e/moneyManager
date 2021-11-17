@@ -10,7 +10,7 @@
 
         <DockPanel Margin="0, 5, 0, 0">
             <Border Style="{StaticResource BorderStyling}">
-                <StackPanel Orientation="Vertical">
+                <StackPanel>
                     <Label x:Name="StackPanelHeader"
                    FontWeight="Bold"
                    Content="Add a new Transaction">

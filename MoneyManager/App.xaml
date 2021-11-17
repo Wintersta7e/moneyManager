@@ -7,7 +7,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/MainWindowStyle.xaml" />
                 <ResourceDictionary Source="Styles/AssetListStyle.xaml" />
-                <ResourceDictionary Source="Styles/BorderStyle.xaml"/>
+                <ResourceDictionary Source="Styles/BorderStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,8 +1,6 @@
 ﻿using MoneyManager.Helpers;
 using MoneyManager.Models;
 using System;
-using System.Globalization;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,28 +15,28 @@ namespace MoneyManager.Controls
         //public event handler to handle click on add button inside usercontrol
         public RoutedEventHandler OnAddTransaction;
 
-        private void onAddTransactionClick(object sender, RoutedEventArgs e)
+        private void OnAddTransactionClick(object sender, RoutedEventArgs e)
         {
             this.OnAddTransaction(sender, e);
         }
 
         //test value input and "restrict" it to only doubles
-        private void onTextPreviewInput(object sender, TextCompositionEventArgs e)
+        private void OnTextPreviewInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = ValueCheck.isDouble(e.Text);
+            e.Handled = ValueCheck.IsDouble(e.Text);
         }
 
-        private void events()
+        private void Events()
         {
-            this.AddTransaction.Click += this.onAddTransactionClick;
-            this.txtAmount.PreviewTextInput += this.onTextPreviewInput;
+            this.AddTransaction.Click += this.OnAddTransactionClick;
+            this.txtAmount.PreviewTextInput += this.OnTextPreviewInput;
         }
 
         public TransactionCreator()
         {
             InitializeComponent();
 
-            this.events();
+            this.Events();
         }
 
         public string Description
@@ -49,7 +47,7 @@ namespace MoneyManager.Controls
 
         public decimal Amount
         {
-            get => ValueCheck.getVal(this.txtAmount.Text);
+            get => ValueCheck.GetVal(this.txtAmount.Text);
             set => this.txtAmount.Text = value.ToString();
         }
 
@@ -62,9 +60,7 @@ namespace MoneyManager.Controls
 
         private EAssetType EvaluateType(string amount)
         {
-            if (amount.Contains("-"))
-                return EAssetType.EXPENSE;
-            return EAssetType.INCOME;
+            return amount.Contains("-") ? EAssetType.EXPENSE : EAssetType.INCOME;
         }
 
         public Asset AssetItem => new Asset { Description = this.Description, Amount = this.Amount, Category = this.Type, CreationDate = this.Date };

@@ -11,39 +11,27 @@ namespace MoneyManager
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ExpenseList expenseList;
-
         private int sel = -1;
 
-        public ExpenseList ExpenseList
-        {
-            get
-            {
-                return this.expenseList;
-            }
-            set
-            {
-                this.expenseList = value;
-            }
-        }
+        public ExpenseList ExpenseList { get; set; }
 
         private void OnLoad()
         {
-            this.expenseList = new ExpenseList();
+            this.ExpenseList = new ExpenseList();
 
             this.AssetCreator.OnAddTransaction = new RoutedEventHandler(AddAsset);
 
-            this.IncomeList.ItemsSource = this.expenseList.Income;
-            this.CostsList.ItemsSource = this.expenseList.Costs;
+            this.IncomeList.ItemsSource = this.ExpenseList.Income;
+            this.CostsList.ItemsSource = this.ExpenseList.Costs;
 
             this.DataContext = this;
         }
 
         private void LoadedFile(ExpenseList _expenseList)
         {
-            this.expenseList = new ExpenseList(_expenseList.Costs, _expenseList.Income);
-            this.IncomeList.ItemsSource = this.expenseList.Income;
-            this.CostsList.ItemsSource = this.expenseList.Costs;
+            this.ExpenseList = new ExpenseList(_expenseList.Costs, _expenseList.Income);
+            this.IncomeList.ItemsSource = this.ExpenseList.Income;
+            this.CostsList.ItemsSource = this.ExpenseList.Costs;
 
             this.DataContext = this;
             this.UpdateResults();
@@ -51,9 +39,9 @@ namespace MoneyManager
 
         private void UpdateResults()
         {
-            this.TotalCosts.Text = this.expenseList.TotalCosts.ToString();
-            this.TotalIncome.Text = this.expenseList.TotalIncome.ToString();
-            this.TotalSum.Text = this.expenseList.FinalSum.ToString();
+            this.TotalCosts.Text = this.ExpenseList.TotalCosts.ToString();
+            this.TotalIncome.Text = this.ExpenseList.TotalIncome.ToString();
+            this.TotalSum.Text = this.ExpenseList.FinalSum.ToString();
         }
 
         public MainWindow()
@@ -65,19 +53,25 @@ namespace MoneyManager
 
         private void AddAsset(object sender, RoutedEventArgs e)
         {
-            this.expenseList.AddAsset(this.AssetCreator.AssetItem);
+            this.ExpenseList.AddAsset(this.AssetCreator.AssetItem);
             this.UpdateResults();
-            //TODO: this.AssetCreator.Reset();
+            //TODO: this.AssetCreator.Reset()
         }
 
         private void IncomeListSelection(object sender, RoutedEventArgs e)
         {
             if (this.IncomeList.Items.Count == 0)
+            {
                 return;
+            }
 
             this.sel = this.IncomeList.SelectedIndex;
-            if (this.sel > this.expenseList.Income.Count || this.sel < 0)
+
+            if (this.sel > this.ExpenseList.Income.Count || this.sel < 0)
+            {
+                //TODO: WIP
                 return;
+            }
         }
 
         private void CostsListSelection(object sender, RoutedEventArgs e)
@@ -86,7 +80,7 @@ namespace MoneyManager
                 return;
 
             this.sel = this.CostsList.SelectedIndex;
-            if (this.sel > this.expenseList.Costs.Count || this.sel < 0)
+            if (this.sel > this.ExpenseList.Costs.Count || this.sel < 0)
                 return;
         }
 
@@ -97,18 +91,21 @@ namespace MoneyManager
             switch (menu)
             {
                 case "menuSave":
-                    FileSaver.SaveFile(this.expenseList);
+                    FileSaver.SaveFile(this.ExpenseList);
                     break;
 
                 case "menuLoad":
                     Load();
+                    break;
+
+                default:
                     break;
             }
         }
 
         public void Load()
         {
-            var openFileDialog = new OpenFileDialog
+            OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 Filter = "Json files (*.json)|*.json|Text files (*.txt)|*.txt"
             };

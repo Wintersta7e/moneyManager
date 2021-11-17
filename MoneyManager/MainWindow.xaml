@@ -48,7 +48,7 @@
 
             <!--TOP CONTROL-->
             <DockPanel DockPanel.Dock="Top">
-                <Grid >
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="auto" />
@@ -57,12 +57,13 @@
 
                     <Grid Grid.Column="0">
                         <Grid Grid.Row="0">
-                            <cAssetCreator:PlanOverview x:Name="PlanOverview" Margin="20, 10, 0, 0" />
+                            <DataGrid x:Name="MonthReport">
+                            </DataGrid>
                         </Grid>
                     </Grid>
                     <Grid Grid.Column="2">
                         <Grid Grid.Row="0">
-                            <cAssetCreator:TransactionCreator x:Name="AssetCreator" Margin="0, 10, 20, 0"/>
+                            <cAssetCreator:TransactionCreator x:Name="AssetCreator" Margin="0, 10, 20, 0" />
                         </Grid>
                     </Grid>
                 </Grid>
