@@ -1,23 +1,23 @@
-﻿using MoneyManager.Models;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using MoneyManager.Models;
 
 namespace MoneyManager.Helpers
 {
     public class ListObserver
     {
-        public ObservableCollection<Asset> income;
-        public ObservableCollection<Asset> costs;
+        public readonly ObservableCollection<Asset> Costs;
+        public readonly ObservableCollection<Asset> Income;
 
         public ListObserver()
         {
-            this.income = new ObservableCollection<Asset>();
-            this.costs = new ObservableCollection<Asset>();
+            Income = new ObservableCollection<Asset>();
+            Costs = new ObservableCollection<Asset>();
         }
 
         public ListObserver(ExpenseList expenseList)
         {
-            this.income = expenseList.Income;
-            this.costs = expenseList.Costs;
+            Income = expenseList.Income;
+            Costs = expenseList.Costs;
         }
     }
 }

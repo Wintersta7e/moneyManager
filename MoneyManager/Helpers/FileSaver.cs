@@ -1,8 +1,8 @@
-﻿using Microsoft.Win32;
+﻿using System.Collections.ObjectModel;
+using System.IO;
+using Microsoft.Win32;
 using MoneyManager.Models;
 using Newtonsoft.Json;
-using System.Collections.ObjectModel;
-using System.IO;
 
 namespace MoneyManager.Helpers
 {
@@ -12,27 +12,29 @@ namespace MoneyManager.Helpers
 
         public static ExpenseList Load(string name)
         {
-            string js = File.ReadAllText(name);
-            ListObserver listObserver = JsonConvert.DeserializeObject<ListObserver>(js);
-            ObservableCollection<Asset> income = new ObservableCollection<Asset>();
-            ObservableCollection<Asset> costs = new ObservableCollection<Asset>();
+            var js = File.ReadAllText(name);
+            var listObserver = JsonConvert.DeserializeObject<ListObserver>(js);
+            var income = new ObservableCollection<Asset>();
+            var costs = new ObservableCollection<Asset>();
 
-            foreach (Asset i in listObserver.income)
-            {
-                income.Add(new Asset { Description = i.Description, Amount = i.Amount, CreationDate = i.CreationDate, Category = i.Category });
-            }
-            foreach (Asset c in listObserver.costs)
-            {
-                costs.Add(new Asset { Description = c.Description, Amount = c.Amount, CreationDate = c.CreationDate, Category = c.Category });
-            }
+            foreach (var i in listObserver.Income)
+                income.Add(new Asset
+                {
+                    Description = i.Description, Amount = i.Amount, CreationDate = i.CreationDate, Category = i.Category
+                });
+            foreach (var c in listObserver.Costs)
+                costs.Add(new Asset
+                {
+                    Description = c.Description, Amount = c.Amount, CreationDate = c.CreationDate, Category = c.Category
+                });
 
             return new ExpenseList(costs, income);
         }
 
         public static void SaveAs(string name, ExpenseList expenseList)
         {
-            ListObserver listObserver = new ListObserver(expenseList);
-            string js = JsonConvert.SerializeObject(listObserver);
+            var listObserver = new ListObserver(expenseList);
+            var js = JsonConvert.SerializeObject(listObserver);
             File.WriteAllText(name, js);
         }
 
@@ -45,7 +47,7 @@ namespace MoneyManager.Helpers
 
             if (saveFileDialog.ShowDialog() == true)
             {
-                string fileName = saveFileDialog.FileName;
+                var fileName = saveFileDialog.FileName;
                 SaveAs(fileName, expenseList);
             }
         }

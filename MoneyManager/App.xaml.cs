@@ -1,11 +1,9 @@
-﻿using System.Windows;
-
-namespace MoneyManager
+﻿namespace MoneyManager
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    ///     Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
     }
 }

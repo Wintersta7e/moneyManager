@@ -8,7 +8,7 @@
         <Setter Property="Title" Value="Money Manager" />
         <Setter Property="ResizeMode" Value="CanMinimize" />
         <Setter Property="ResizeMode" Value="CanResize" />
-        <Setter Property="Background" Value="#36342f" />
+        <Setter Property="Background" Value="Azure" />
         <Setter Property="WindowState" Value="Maximized" />
     </Style>
 

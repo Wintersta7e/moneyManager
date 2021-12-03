@@ -12,23 +12,22 @@
             <Border Style="{StaticResource BorderStyling}">
                 <StackPanel>
                     <Label x:Name="StackPanelHeader"
-                   FontWeight="Bold"
-                   Content="Add a new Transaction">
-                    </Label>
+                           FontWeight="Bold"
+                           Content="Add a new Transaction" />
                     <StackPanel>
-                        <Label Content="Description"></Label>
-                        <TextBox x:Name="txtDescription" />
+                        <Label Content="Description" />
+                        <TextBox x:Name="TxtDescription" />
                     </StackPanel>
                     <StackPanel>
-                        <Label Content="Amount"></Label>
-                        <TextBox x:Name="txtAmount" />
+                        <Label Content="Amount" />
+                        <TextBox x:Name="TxtAmount" />
                     </StackPanel>
                     <StackPanel>
                         <Button x:Name="AddTransaction" Content="Add Transaction" Margin="10">
                             <Button.IsEnabled>
                                 <MultiBinding Converter="{StaticResource EnableMultiConverter}">
-                                    <Binding ElementName="txtDescription" Path="Text"></Binding>
-                                    <Binding ElementName="txtAmount" Path="Text"></Binding>
+                                    <Binding ElementName="TxtDescription" Path="Text" />
+                                    <Binding ElementName="TxtAmount" Path="Text" />
                                 </MultiBinding>
                             </Button.IsEnabled>
                         </Button>

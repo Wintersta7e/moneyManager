@@ -3,109 +3,30 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:cAssetCreator="clr-namespace:MoneyManager.Controls"
+        xmlns:cMainViews="clr-namespace:MoneyManager.Views"
         mc:Ignorable="d"
         Style="{StaticResource MainWindowStyle}">
 
-    <DockPanel LastChildFill="True">
+    <DockPanel>
         <!--MENUs-->
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="File" MenuItem.Click="MenuClick">
-                <MenuItem x:Name="menuSave" Header="Save" />
-                <MenuItem x:Name="menuLoad" Header="Load" />
+            <MenuItem Header="File" Click="MenuClick">
+                <MenuItem x:Name="MenuSave" Header="Save" />
+                <MenuItem x:Name="MenuLoad" Header="Load" />
             </MenuItem>
         </Menu>
         <!--END MENUs-->
 
-        <DockPanel LastChildFill="True" Margin="3" Background="WhiteSmoke">
-            <!--BOTTOM INFOS-->
-            <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource BottomSection}">
+        <!-- TABs -->
+        <TabControl DockPanel.Dock="Top">
+            <TabItem Header="Expense and Income overview">
+                <DockPanel LastChildFill="True" Margin="3" Background="WhiteSmoke">
+                    <cMainViews:ExpIncOverview x:Name="ExpIncOverview" />
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Reports" />
+        </TabControl>
+        <!-- END TABs -->
 
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Total Income" />
-                    <Border BorderBrush="ForestGreen" BorderThickness="2">
-                        <TextBlock x:Name="TotalIncome" Text="0" TextAlignment="Center" />
-                    </Border>
-                </StackPanel>
-
-                <StackPanel Orientation="Vertical" Margin="200, 0">
-                    <Label Content="Total Sum" />
-                    <Border BorderBrush="CornflowerBlue" BorderThickness="2">
-                        <TextBlock x:Name="TotalSum" Text="0" TextAlignment="Center" />
-                    </Border>
-                </StackPanel>
-
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Total Costs" />
-                    <Border BorderBrush="DarkRed" BorderThickness="2">
-                        <TextBlock x:Name="TotalCosts" Text="0" TextAlignment="Center" />
-                    </Border>
-                </StackPanel>
-            </StackPanel>
-            <!--END BOTTOM INFOS-->
-
-            <Rectangle DockPanel.Dock="Bottom" Style="{StaticResource HDelimiter}" Margin="40, 10" />
-
-            <!--TOP CONTROL-->
-            <DockPanel DockPanel.Dock="Top">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Grid Grid.Column="0">
-                        <Grid Grid.Row="0">
-                            <DataGrid x:Name="MonthReport">
-                            </DataGrid>
-                        </Grid>
-                    </Grid>
-                    <Grid Grid.Column="2">
-                        <Grid Grid.Row="0">
-                            <cAssetCreator:TransactionCreator x:Name="AssetCreator" Margin="0, 10, 20, 0" />
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </DockPanel>
-
-            <!--END TOP CONTROL-->
-
-            <Rectangle DockPanel.Dock="Top" Style="{StaticResource HDelimiter}" Margin="40, 10" />
-
-            <!--SHOW INCOME/COSTS LISTS-->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <Rectangle Grid.Column="1" Style="{StaticResource VDelimiter}" />
-
-                <!-- =================== INCOME =================== -->
-                <Grid Grid.Column="0" Margin="20, 0, 0, 0">
-                    <Grid Grid.Row="0">
-                        <DataGrid     x:Name="IncomeList"
-                                      Style="{StaticResource TransactionsData}"
-                                      ItemsSource="{Binding Asset}"
-                                      SelectionChanged="IncomeListSelection">
-                        </DataGrid>
-                    </Grid>
-                </Grid>
-
-                <!-- =================== COSTS =================== -->
-                <Grid Grid.Column="2" Margin="0, 0, 20, 0">
-                    <Grid Grid.Row="0">
-                        <DataGrid x:Name="CostsList"
-                                      Style="{StaticResource TransactionsData}"
-                                      ItemsSource="{Binding Asset}"
-                                      SelectionChanged="CostsListSelection">
-                        </DataGrid>
-                    </Grid>
-                </Grid>
-            </Grid>
-            <!--END SHOW INCOME/COSTS LISTS-->
-        </DockPanel>
     </DockPanel>
 </Window>

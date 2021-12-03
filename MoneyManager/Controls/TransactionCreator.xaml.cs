@@ -1,68 +1,57 @@
-﻿using MoneyManager.Helpers;
-using MoneyManager.Models;
-using System;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
+using MoneyManager.Helpers;
+using MoneyManager.Models;
 
 namespace MoneyManager.Controls
 {
     /// <summary>
-    /// Interaction logic for TransactionCreator.xaml
+    ///     Interaction logic for TransactionCreator.xaml
     /// </summary>
-    public partial class TransactionCreator : UserControl
+    public partial class TransactionCreator
     {
         //public event handler to handle click on add button inside usercontrol
         public RoutedEventHandler OnAddTransaction;
 
+        public TransactionCreator()
+        {
+            InitializeComponent();
+
+            Events();
+        }
+
+        private string Description => TxtDescription.Text;
+
+        private decimal Amount => ValueCheck.GetVal(TxtAmount.Text);
+
+        private EAssetType Type => EvaluateType(TxtAmount.Text);
+
+        private static string Date => DateTime.Now.ToLongDateString();
+
+        public Asset AssetItem => new Asset
+            {Description = Description, Amount = Amount, Category = Type, CreationDate = Date};
+
         private void OnAddTransactionClick(object sender, RoutedEventArgs e)
         {
-            this.OnAddTransaction(sender, e);
+            OnAddTransaction(sender, e);
         }
 
         //test value input and "restrict" it to only doubles
-        private void OnTextPreviewInput(object sender, TextCompositionEventArgs e)
+        private static void OnTextPreviewInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = ValueCheck.IsDouble(e.Text);
         }
 
         private void Events()
         {
-            this.AddTransaction.Click += this.OnAddTransactionClick;
-            this.txtAmount.PreviewTextInput += this.OnTextPreviewInput;
+            AddTransaction.Click += OnAddTransactionClick;
+            TxtAmount.PreviewTextInput += OnTextPreviewInput;
         }
 
-        public TransactionCreator()
+        private static EAssetType EvaluateType(string amount)
         {
-            InitializeComponent();
-
-            this.Events();
+            return amount.Contains("-") ? EAssetType.Expense : EAssetType.Income;
         }
-
-        public string Description
-        {
-            get => this.txtDescription.Text;
-            set => this.txtDescription.Text = value.ToString();
-        }
-
-        public decimal Amount
-        {
-            get => ValueCheck.GetVal(this.txtAmount.Text);
-            set => this.txtAmount.Text = value.ToString();
-        }
-
-        public EAssetType Type => EvaluateType(this.txtAmount.Text);
-
-        public string Date
-        {
-            get => DateTime.Now.ToLongDateString();
-        }
-
-        private EAssetType EvaluateType(string amount)
-        {
-            return amount.Contains("-") ? EAssetType.EXPENSE : EAssetType.INCOME;
-        }
-
-        public Asset AssetItem => new Asset { Description = this.Description, Amount = this.Amount, Category = this.Type, CreationDate = this.Date };
     }
 }

@@ -2,7 +2,7 @@
 {
     public enum EAssetType
     {
-        EXPENSE,
-        INCOME
+        Expense,
+        Income
     }
 }

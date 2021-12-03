@@ -1,15 +1,21 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 
 namespace MoneyManager.Models
 {
     public class ExpenseList : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyRaised(string propertyName)
+        public ExpenseList()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            Costs = new ObservableCollection<Asset>();
+            Income = new ObservableCollection<Asset>();
+        }
+
+        public ExpenseList(ObservableCollection<Asset> cost, ObservableCollection<Asset> inc)
+        {
+            Costs = cost;
+            Income = inc;
         }
 
         public ObservableCollection<ReportItem> ReportItems { get; set; }
@@ -18,72 +24,41 @@ namespace MoneyManager.Models
 
         public ObservableCollection<Asset> Income { get; set; }
 
-        private decimal ComputeCosts()
-        {
-            decimal sum = 0;
-            foreach (Asset cost in Costs)
-            {
-                sum += cost.Amount;
-            }
+        public decimal TotalCosts => ComputeCosts();
 
-            return sum;
+        public decimal TotalIncome => ComputeIncome();
+
+        public decimal FinalSum => ComputeTotal();
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyRaised(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public decimal TotalCosts
+        private decimal ComputeCosts()
         {
-            get => this.ComputeCosts();
+            return Costs.Sum(cost => cost.Amount);
         }
 
         private decimal ComputeIncome()
         {
-            decimal sum = 0;
-            foreach (Asset inc in Income)
-            {
-                sum += inc.Amount;
-            }
-
-            return sum;
-        }
-
-        public decimal TotalIncome
-        {
-            get => this.ComputeIncome();
+            return Income.Sum(inc => inc.Amount);
         }
 
         private decimal ComputeTotal()
         {
-            return this.ComputeIncome() + this.ComputeCosts();
-        }
-
-        public decimal FinalSum
-        {
-            get => this.ComputeTotal();
-        }
-
-        public ExpenseList()
-        {
-            this.Costs = new ObservableCollection<Asset>();
-            this.Income = new ObservableCollection<Asset>();
-        }
-
-        public ExpenseList(ObservableCollection<Asset> _cost, ObservableCollection<Asset> _inc)
-        {
-            this.Costs = _cost;
-            this.Income = _inc;
+            return ComputeIncome() + ComputeCosts();
         }
 
         public void AddAsset(Asset ass)
         {
-            if (ass.Category == EAssetType.EXPENSE)
-            {
-                this.Costs.Add(ass);
-            }
+            if (ass.Category == EAssetType.Expense)
+                Costs.Add(ass);
             else
-            {
-                this.Income.Add(ass);
-            }
+                Income.Add(ass);
 
-            this.OnPropertyRaised("updated");
+            OnPropertyRaised("updated");
         }
     }
 }
